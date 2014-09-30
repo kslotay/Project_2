@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html>
+<!-- Kulvinder Lotay
+	 Introduction To Programming
+	 Project 2 -->
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="author" 	content="Kulvinder Lotay" />
+		<title>Game v0.2</title>
+		<!-- Separated created styles from styles on existing elements -->
+		<style>
+			.header {font-weight: bold; font-family: "Calibri", sans-serif;)
+			.footer {padding-left: 25px; font-style: italic;}
+		</style>
+		<style>
+			h1 {text-align: center;}
+			body {background-color: #e8e8e8; font-family: "Calibri", sans-serif;}
+			p {padding-left: 25px; font-style: italic;}
+			li {font-family: "Calibri", sans-serif;}
+			hr {width: 100%;}
+			table{border: 5px solid black; margin-left: auto; margin-right: auto;}
+			th{border: 1px solid black;}
+			th, td{padding: 30px;}
+		</style>
+			<!-- hr {height: 2px; float: left; width: "100%"} -->
+		<script type="text/javascript">
+			var loc = ["Prison Cell", "Dining Room", "Multi-purpose Room", "Courtyard", "Infirmary", "Visiting Room", "Gymnasium", "Warden's Office"];
+			var loc_visited = [true, false, false, false, false, false, false, false];
+			var points = 0;
+			var message = "You move to the ";
+			//var desc = [""];
+			//var cmd = ["look", "take", "punch", "kick", "eat"];
+			var current_loc = 0;
+			
+			function param_change() {
+				var loc_box = document.getElementById("txtLocation");
+				var msg_box = document.getElementById("ta_Main");
+				var txt_points = document.getElementById("txtPoints");
+				loc_box.value = loc[current_loc];
+				if (loc_visited[current_loc] === false) {
+					points += 5;
+					txt_points.value = points;
+					loc_visited[current_loc] = true;
+				}
+				if (points >= 35) {
+					msg_box.value = "You have 35 points! You win!";
+				}
+				else {
+					msg_box.value = message + loc[current_loc] + "\n\n" + msg_box.value;
+				}
+			}
+			
+			function btnNorth_Click() {
+				if (current_loc === 0) {
+					current_loc = 2;
+					param_change();
+				}
+				else if (current_loc === 1) {
+					current_loc = 4;
+					param_change();
+				}
+				else if (current_loc === 2) {
+					current_loc = 5;
+					param_change();
+				}
+				else if (current_loc === 3) {
+					current_loc = 6;
+					param_change();
+				}
+				else if (current_loc === 5) {
+					current_loc = 7;
+					param_change();
+				}
+			}
+			function btnEast_Click() {
+				if (current_loc === 1) {
+					current_loc = 2;
+					param_change();
+				}
+				else if (current_loc === 2) {
+					current_loc = 3;
+					param_change();
+				}
+				else if (current_loc === 4) {
+					current_loc = 5;
+					param_change();
+				}
+				else if (current_loc === 5) {
+					current_loc = 6;
+					param_change();
+				}
+			}
+			function btnWest_Click() {
+				if (current_loc === 2) {
+					current_loc = 1;
+					param_change();
+				}
+				else if (current_loc === 3) {
+					current_loc = 2;
+					param_change();
+				}
+				else if (current_loc === 5) {
+					current_loc = 4;
+					param_change();
+				}
+				else if (current_loc === 6) {
+					current_loc = 5;
+					param_change();
+				}
+			}
+			function btnSouth_Click() {
+				if (current_loc === 2) {
+					current_loc = 0;
+					param_change();
+				}
+				else if (current_loc === 4) {
+					current_loc = 1;
+					param_change();
+				}
+				else if (current_loc === 5) {
+					current_loc = 2;
+					param_change();
+				}
+				else if (current_loc === 6) {
+					current_loc = 3;
+					param_change();
+				}
+				else if (current_loc === 7) {
+					current_loc = 5;
+					param_change();
+				}
+			}
+			
+			function btnEnter_click() {
+				var txtCommandElement = document.getElementById("txtCommand");
+				alert(txtCommandElement.value);
+				var usrCommand = txtCommandElement.value;
+				txtCommandElement.value = null;
+				}
+		</script>
+	</head>
+	<body>
+		<h1 class="header" style="font-family: 'Impact';">Get On My Level</h1>
+		<!-- <h2 class="header" style="color: #a00000; font-weight: normal;">Introduction To Programming - CMPT 120L-111</h2> -->
+		<!-- Overriding the color and font-weight attribute of the header class for h2 -->
+		<p>
+			Contact me at
+			<a href="mailto:kulvinder.lotay1@marist.edu?Subject=Go%20Gunners">kulvinder.lotay1@marist.edu</a>
+			if you have any problems
+		</p>
+		<!-- \n for newline character -->
+		<hr />
+		<br />
+		<div style="text-align: center;">
+			<input id="if_test"
+				   type="button"
+				   value="Hello!"
+				   onclick="ifTest();" />
+			<br />
+			<br />
+			
+			Current Location:
+			<input readonly
+				   type="text"
+				   id="txtLocation"
+				   name="txtLocation"
+				   value="Prison Cell">
+			<br />
+			<textarea readonly rows="10" cols="30" id="ta_Main">Welcome to Get On My Level!
+			
+You are currently in the prison cell. For every time you visit a new location, you will receive 5 points. Get 35 points to win the game!
+			</textarea>
+			<br />
+			<br />
+			<input type="button"
+				   value="North"
+				   onclick="btnNorth_Click()">
+			<input type="button"
+				   value="South"
+				   onclick="btnSouth_Click()">
+			<input type="button"
+				   value="East"
+				   onclick="btnEast_Click()">
+			<input type="button"
+				   value="West"
+				   onclick="btnWest_Click()">
+			<br />
+			<br />
+			Command:
+			<input type="text"
+				   id="txtCommand"
+				   name="txtCommand">
+			<input type="button"
+				   value="Enter"
+				   onclick="btnEnter_click()">
+			<br />
+			Points:
+			<input readonly
+				   type="text"
+				   id="txtPoints"
+				   value=0>
+			<br />
+			<br />
+			Map:
+			<br />
+			<br />
+			<table>
+				<tr>
+					<td></td>
+					<th>Warden's Office</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Infirmary</th>
+					<th>Visiting Room</th>
+					<th>Gymnasium</th>
+				</tr>
+				<tr>
+					<th>Dining Room</th>
+					<th>Multi-purpose Room</th>
+					<th>Courtyard</th>
+				</tr>
+				<tr>
+					<td></td>
+					<th>Prison Cell</th>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+		<br />
+		<br />
+		<p>
+			<a href="http://validator.w3.org/#validate_by_input">Validate as HTML5</a>
+		</p>
+	</body>
+</html>
