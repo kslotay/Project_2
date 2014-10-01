@@ -6,7 +6,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		<meta name="author" 	content="Kulvinder Lotay" />
-		<title>Game v0.2</title>
+		<title>Prison Break v0.2</title>
 		<!-- Separated created styles from styles on existing elements -->
 		<style>
 			.header {font-weight: bold; font-family: "Calibri", sans-serif;)
@@ -18,20 +18,30 @@
 			p {padding-left: 25px; font-style: italic;}
 			li {font-family: "Calibri", sans-serif;}
 			hr {width: 100%;}
-			table{border: 5px solid black; margin-left: auto; margin-right: auto;}
-			th{border: 1px solid black;}
+			table {border: 5px solid black; margin-left: auto; margin-right: auto;}
+			th {border: 1px solid black;}
 			th, td{padding: 30px;}
 		</style>
-			<!-- hr {height: 2px; float: left; width: "100%"} -->
 		<script type="text/javascript">
+			//Locations stored in array to make them easily accessible (centralized location)
 			var loc = ["Prison Cell", "Dining Room", "Multi-purpose Room", "Courtyard", "Infirmary", "Visiting Room", "Gymnasium", "Warden's Office"];
+			
+			//Used to determine if the player has visited any of the locations yet. The array index corresponds to the matching locations in loc array
 			var loc_visited = [true, false, false, false, false, false, false, false];
+			
+			//Location descriptions stored in an array for centralized access, the indexes correspond to matching locations in loc array
+			var loc_desc = ["It is dark, damp and smelly. The cell door is open.","There are a number of dining tables, but there is no food!","There are a number of other prison inmates sitting around, they ignore you.","The courtyard is empty except for the few guards on watch duty.","There is a doctor in the infirmary, he does not want you there.","There is no one in the visiting room. Your family does not want to see you.","There is a basketball game between inmates currently taking place, but they will not allow you to join!","The Warden ignores you, he is talking on the phone."]
+			
+			//Global points variable
 			var points = 0;
 			var message = "You move to the ";
-			//var desc = [""];
-			//var cmd = ["look", "take", "punch", "kick", "eat"];
+			//Variable used to store the index of the current location, used when referencing arrays
 			var current_loc = 0;
 			
+			//Commands have not yet been implemented
+			//var cmd = ["look", "take", "punch", "kick", "eat"];
+						
+			//Separate function with reusable code for all btn_click functions
 			function param_change() {
 				var loc_box = document.getElementById("txtLocation");
 				var msg_box = document.getElementById("ta_Main");
@@ -46,10 +56,11 @@
 					msg_box.value = "You have 35 points! You win!";
 				}
 				else {
-					msg_box.value = message + loc[current_loc] + "\n\n" + msg_box.value;
+					msg_box.value = message + loc[current_loc] + "\n\n" +loc_desc[current_loc] + "\n\n" + msg_box.value;
 				}
 			}
 			
+			//Functions for each button, the common reusable code is referenced (param_change() function)
 			function btnNorth_Click() {
 				if (current_loc === 0) {
 					current_loc = 2;
@@ -131,16 +142,19 @@
 				}
 			}
 			
+			//Enter button function will be used when commands are implemented
+			/*
 			function btnEnter_click() {
 				var txtCommandElement = document.getElementById("txtCommand");
 				alert(txtCommandElement.value);
 				var usrCommand = txtCommandElement.value;
 				txtCommandElement.value = null;
 				}
+			*/
 		</script>
 	</head>
 	<body>
-		<h1 class="header" style="font-family: 'Impact';">Get On My Level</h1>
+		<h1 class="header" style="font-family: 'Impact';">Prison Break</h1>
 		<!-- <h2 class="header" style="color: #a00000; font-weight: normal;">Introduction To Programming - CMPT 120L-111</h2> -->
 		<!-- Overriding the color and font-weight attribute of the header class for h2 -->
 		<p>
@@ -148,17 +162,10 @@
 			<a href="mailto:kulvinder.lotay1@marist.edu?Subject=Go%20Gunners">kulvinder.lotay1@marist.edu</a>
 			if you have any problems
 		</p>
-		<!-- \n for newline character -->
 		<hr />
 		<br />
 		<div style="text-align: center;">
-			<input id="if_test"
-				   type="button"
-				   value="Hello!"
-				   onclick="ifTest();" />
-			<br />
-			<br />
-			
+		<!-- Some objects are read only as they are only needed to display information, and should not be editable by the user/player -->
 			Current Location:
 			<input readonly
 				   type="text"
@@ -166,9 +173,11 @@
 				   name="txtLocation"
 				   value="Prison Cell">
 			<br />
-			<textarea readonly rows="10" cols="30" id="ta_Main">Welcome to Get On My Level!
+			<textarea readonly rows="10" cols="30" id="ta_Main">Welcome to Prison Break!
 			
-You are currently in the prison cell. For every time you visit a new location, you will receive 5 points. Get 35 points to win the game!
+For every time you visit a new location, you will receive 5 points. Get 35 points to win the game!
+
+You are currently in the prison cell; it is dark, damp and smelly. The cell door is open.
 			</textarea>
 			<br />
 			<br />
@@ -186,6 +195,7 @@ You are currently in the prison cell. For every time you visit a new location, y
 				   onclick="btnWest_Click()">
 			<br />
 			<br />
+			<!-- Will be used when commands are implemented
 			Command:
 			<input type="text"
 				   id="txtCommand"
@@ -194,6 +204,7 @@ You are currently in the prison cell. For every time you visit a new location, y
 				   value="Enter"
 				   onclick="btnEnter_click()">
 			<br />
+			-->
 			Points:
 			<input readonly
 				   type="text"
