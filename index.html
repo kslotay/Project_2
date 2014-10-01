@@ -46,7 +46,10 @@
 				var loc_box = document.getElementById("txtLocation");
 				var msg_box = document.getElementById("ta_Main");
 				var txt_points = document.getElementById("txtPoints");
+				var map_loc = document.getElementById(current_loc.toString());
 				loc_box.value = loc[current_loc];
+				//Changes current map location color to red
+				map_loc.style.background = "red";
 				if (loc_visited[current_loc] === false) {
 					points += 5;
 					txt_points.value = points;
@@ -60,83 +63,107 @@
 				}
 			}
 			
+			//Restores map location color to default on movement away
+			function map_loc_color_restore() {
+				var map_loc = document.getElementById(current_loc.toString());
+				map_loc.style.background = "";
+			}
+			
 			//Functions for each button, the common reusable code is referenced (param_change() function)
 			function btnNorth_Click() {
 				if (current_loc === 0) {
+					map_loc_color_restore();
 					current_loc = 2;
 					param_change();
 				}
 				else if (current_loc === 1) {
+					map_loc_color_restore();
 					current_loc = 4;
 					param_change();
 				}
 				else if (current_loc === 2) {
+					map_loc_color_restore();
 					current_loc = 5;
 					param_change();
 				}
 				else if (current_loc === 3) {
+					map_loc_color_restore();
 					current_loc = 6;
 					param_change();
 				}
 				else if (current_loc === 5) {
+					map_loc_color_restore();
 					current_loc = 7;
 					param_change();
 				}
 			}
 			function btnEast_Click() {
 				if (current_loc === 1) {
+					map_loc_color_restore();
 					current_loc = 2;
 					param_change();
 				}
 				else if (current_loc === 2) {
+					map_loc_color_restore();
 					current_loc = 3;
 					param_change();
 				}
 				else if (current_loc === 4) {
+					map_loc_color_restore();
 					current_loc = 5;
 					param_change();
 				}
 				else if (current_loc === 5) {
+					map_loc_color_restore();
 					current_loc = 6;
 					param_change();
 				}
 			}
 			function btnWest_Click() {
 				if (current_loc === 2) {
+					map_loc_color_restore();
 					current_loc = 1;
 					param_change();
 				}
 				else if (current_loc === 3) {
+					map_loc_color_restore();
 					current_loc = 2;
 					param_change();
 				}
 				else if (current_loc === 5) {
+					map_loc_color_restore();
 					current_loc = 4;
 					param_change();
 				}
 				else if (current_loc === 6) {
+					map_loc_color_restore();
 					current_loc = 5;
 					param_change();
 				}
 			}
 			function btnSouth_Click() {
 				if (current_loc === 2) {
+					map_loc_color_restore();
 					current_loc = 0;
 					param_change();
 				}
 				else if (current_loc === 4) {
+					map_loc_color_restore();
 					current_loc = 1;
 					param_change();
 				}
 				else if (current_loc === 5) {
+					map_loc_color_restore();
 					current_loc = 2;
 					param_change();
 				}
 				else if (current_loc === 6) {
+					map_loc_color_restore();
 					current_loc = 3;
 					param_change();
 				}
 				else if (current_loc === 7) {
+					map_loc_color_restore();
 					current_loc = 5;
 					param_change();
 				}
@@ -218,22 +245,22 @@ You are currently in the prison cell; it is dark, damp and smelly. The cell door
 			<table>
 				<tr>
 					<td></td>
-					<th>Warden's Office</th>
+					<th id="7">Warden's Office</th>
 					<td></td>
 				</tr>
 				<tr>
-					<th>Infirmary</th>
-					<th>Visiting Room</th>
-					<th>Gymnasium</th>
+					<th id="4">Infirmary</th>
+					<th id="5">Visiting Room</th>
+					<th id="6">Gymnasium</th>
 				</tr>
 				<tr>
-					<th>Dining Room</th>
-					<th>Multi-purpose Room</th>
-					<th>Courtyard</th>
+					<th id="1">Dining Room</th>
+					<th id="2">Multi-purpose Room</th>
+					<th id="3">Courtyard</th>
 				</tr>
 				<tr>
 					<td></td>
-					<th>Prison Cell</th>
+					<th id="0" style="background: red;">Prison Cell</th>
 					<td></td>
 				</tr>
 			</table>
