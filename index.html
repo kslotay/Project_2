@@ -16,7 +16,6 @@
 			h1 {text-align: center;}
 			body {background-color: #e8e8e8; font-family: "Calibri", sans-serif;}
 			p {padding-left: 25px; font-style: italic;}
-			li {font-family: "Calibri", sans-serif;}
 			hr {width: 100%;}
 			table {border: 5px solid black; margin-left: auto; margin-right: auto;}
 			th {border: 1px solid black;}
@@ -49,7 +48,7 @@
 				var map_loc = document.getElementById(current_loc.toString());
 				loc_box.value = loc[current_loc];
 				//Changes current map location color to red
-				map_loc.style.background = "red";
+				map_loc.style.background = "#E80000" ;
 				if (loc_visited[current_loc] === false) {
 					points += 5;
 					txt_points.value = points;
@@ -186,7 +185,7 @@
 		<!-- Overriding the color and font-weight attribute of the header class for h2 -->
 		<p>
 			Contact me at
-			<a href="mailto:kulvinder.lotay1@marist.edu?Subject=Go%20Gunners">kulvinder.lotay1@marist.edu</a>
+			<a href="mailto:kulvinder.lotay1@marist.edu?Subject=Go%20Gunners">kulvinder.lotay1@marist.edu</a> 
 			if you have any problems
 		</p>
 		<hr />
@@ -260,7 +259,7 @@ You are currently in the prison cell; it is dark, damp and smelly. The cell door
 				</tr>
 				<tr>
 					<td></td>
-					<th id="0" style="background: red;">Prison Cell</th>
+					<th id="0" style="background: #E80000;">Prison Cell</th>
 					<td></td>
 				</tr>
 			</table>
